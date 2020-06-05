@@ -8,4 +8,4 @@ The interface consists of 5 screens with different functions. The screens presen
 
 The main screens can be placed anywhere as users wish. They can also be pinned, deleted and following users (TagAlong feature from HoloLens). One could pin a heatmap on the ground and have other information about the heatmap follow them as they walk around to observe the heatmap.
 
-
+See demo pictures in Demo1 folder. 
