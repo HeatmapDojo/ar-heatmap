@@ -1,4 +1,16 @@
-1. Description Pannel 
-A pannel serving as a sticky notes to display general information of the heatmap. 
+1. Demo1
+The whole picture of the user interface, including a descirption pannel, 3 slate displays, a title, and a pannel showing available interactive gestures.
 
-2. 
+2. Description Pannel 
+A pannel serving as a sticky notes to display general information of the heatmap. Users can drag or zoom this pannel. 
+
+3.Slate 
+The main screens in the demo are based on Slate prefab in the Mixed Reality Toolkit. 
+They enable a thin window style control for displaying 2D content such as the heatmaps. 
+The content window can be scrolled via articulated hand input. The window can also be pined wherever the user choose to.
+We implemented a grabbable title bar as well as Follow Me and Close functionality. 
+
+Follow Me：Toggles an orbital solver components to make the slate object follow the user. 
+           User can walk to an open space or wherever they would like to view the heatmap and the displays follow them to the place.
+Close: Disables the slate object as how users can close a window in a computer.
+
