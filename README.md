@@ -42,7 +42,7 @@ Step 1: In the top left, click Build-time, then select the folder Unity-iPhone a
 Step 2: Underneath that section, in Deployment, select your Apple device (iPhone or iPad). Head to the Product menu and click "Build." After the build is complete, head back to the Product menu and click "Run."
 Upon finishing these steps, you should have set up your apple ARKit to be able to start developing mobile apps. After this is accomplished, one can adjust code and add in additional documentation from Apple’s native api’s and libraries to make a unique AR app to their liking.
 
-![alt text](HeatmapDojo/ar-heatmap/blob/master/Demo1/slate.png "Screenshot of a HeatmapDemo in Unity")
+![alt text](Demo1/slate.png "Screenshot of a HeatmapDemo in Unity")
 
 ### Built With
 [Hololens](https://www.microsoft.com/en-us/hololens/developers)  
