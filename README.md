@@ -2,15 +2,15 @@
 
 Over the last few decades, there has been a paradigm shift from viewing data as static plots to dynamic interactive 3D visualizations, which enable deeper insights into the interplay of different parameters. However, 2D screens/monitors are inherently limiting for exploring 3D graphics of large-scale virtual objects (e.g., complex networks in 3D space). For instance, when a network diagram gets very large (e.g., 103 -106 nodes), visualizing its 3D structure on a 2D desktop monitor becomes not only cumbersome from a user experience (UX) perspective, but also fundamentally constraining from a user interface (UI) perspective (because zooming loses visual context of the surrounding nodes environment -- i.e., the tradeoff of “the more you zoom, the less you see”). As such, developing innovative biomedical technology that can enable room-scale virtual models at the level of 3D manipulatable projections would represent a significant technical advance over the state of the art in visual data exploration. Recently, 2D visualization helper tools such as scalable insets (Lekschas et al., 2019) have been developed to address these locality challenges, but these tools still remain relatively unintuitive compared to the potential 3D immersive experience afforded by augmented reality (AR). In general, 3D user interfaces and user experiences are largely an unexplored frontier, prompting further research at the multidisciplinary interface of human-computer interaction (HCI) and AR. Since AR is about the intersection of digital and physical interfaces, we believe that long-standing visualization challenges such as these can be adequately addressed with spatial computing (i.e., augmented reality methodologies). Therefore, the primary goal and objective of this project is to facilitate the development of next-generation AR tools for large-scale biomedical visualization in three major areas of focus: complex networks, interactive heatmaps, and DNA structure (nucleosomes). Since better visualization methods directly facilitate better data exploration and discovery and, given the historical usage and broad popularity of these types of graphics in fields ranging from single-cell transcriptomics to quantitative proteomics, we anticipate the primary utility of our proposed technology will be to allow biomedical and clinical investigators to perform better tests of novel research hypotheses across multiple biological systems and diseases.
  
-### Getting Started
+### Getting Started:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+### Prerequisites:
 This project will be utilizing Microsoft Hololens as well as IOS ARKit.
 
 Microsoft offers two primary options for Hololens. The first option is purchasing Hololens with Dynamics 365 Remote Assist, which allows for hands-free sharing of visual data. The second option is purchasing the Hololens by itself, which costs about $3500. 
 
-### Installation
+### Installation:
 
 #### Hololens:
 
@@ -50,17 +50,17 @@ Upon finishing these steps, you should have set up your apple ARKit to be able t
   <b>Screenshots of a HeatmapDemo in Unity</b><br>
 </p>
 
-### Built With
+### Built With:
 [Hololens](https://www.microsoft.com/en-us/hololens/developers)  
 [ARKit](https://developer.apple.com/augmented-reality/)
 
-### Contributing
+### Contributing:
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
 
-### Authors
+### Authors:
 Bohdan Khomtchouk - Initial work 
 
-### License
+### License:
 This project is licensed under the UChicago License - see the LICENSE.md file for details
 
 
