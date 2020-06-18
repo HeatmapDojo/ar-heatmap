@@ -53,7 +53,6 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 
 ### Authors
 Bohdan Khomtchouk - Initial work 
-See also the list of contributors who participated in this project.
 
 ### License
 This project is licensed under the UChicago License - see the LICENSE.md file for details
