@@ -45,8 +45,8 @@ Upon finishing these steps, you should have set up your apple ARKit to be able t
 Screenshot of a HeatmapDemo in Unity
 
 ### Built With
-Hololens
-ARKit
+[Hololens](https://www.microsoft.com/en-us/hololens/developers)  
+[ARKit](https://developer.apple.com/augmented-reality/)
 
 ### Contributing
 Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
