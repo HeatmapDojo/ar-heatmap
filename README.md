@@ -46,7 +46,9 @@ Upon finishing these steps, you should have set up your apple ARKit to be able t
 
 ![alt text](Demo1/demo1.PNG "Screenshot of a HeatmapDemo in Unity")
 
-Screenshots of a HeatmapDemo in Unity
+<p align="center">
+  <b>Screenshots of a HeatmapDemo in Unity</b><br>
+</p>
 
 ### Built With
 [Hololens](https://www.microsoft.com/en-us/hololens/developers)  
