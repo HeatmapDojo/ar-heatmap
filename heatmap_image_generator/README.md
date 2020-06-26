@@ -6,13 +6,13 @@ First, run '$ make' to build the programs. There are two programs in the folder 
 
 1) heatmap_gen: Generates heatmap png file based upon desired data tile dimensions.
 - Input: 
-image_width: Desired width (pixels) of your output heatmap image. 
-image_height: Desired height (pixels) of your output heatmapmimage.
-tile_ratio_x: Desired width of each data tile (width ratio with respect to tile_ratio_y)
-tile_ratio_y: Desired height of each data tile (height ratio with respect to tile_ratio_x)
-num_data_cols: Number of data columns in the input CSV data file (exclude the labels)
-num_data_rows: Number of data rows in the input CSV data file (exclude the labels)
-csv_data_filename: File path of your csv data file.
+  - image_width: Desired width (pixels) of your output heatmap image. 
+  - image_height: Desired height (pixels) of your output heatmapmimage.
+  - tile_ratio_x: Desired width of each data tile (width ratio with respect to tile_ratio_y)
+  - tile_ratio_y: Desired height of each data tile (height ratio with respect to tile_ratio_x)
+  - num_data_cols: Number of data columns in the input CSV data file (exclude the labels)
+  - num_data_rows: Number of data rows in the input CSV data file (exclude the labels)
+  - csv_data_filename: File path of your csv data file.
 - Example usage via commandline: 
 ```bash
 generators/heatmap_gen 10000 10000 10 1 8 10000 sample_data/hugeGenesFile.csv RdYlGn_discrete > example_output/hugeGenesFile.png
@@ -20,11 +20,11 @@ generators/heatmap_gen 10000 10000 10 1 8 10000 sample_data/hugeGenesFile.csv Rd
 
 2) heatmap_gen_fit_image: Generates heatmap png file based upon desired image output dimensions. Automatically rescales data tiles accordingly.
 - Input: 
-image_width: Desired width (pixels) of your output heatmap image. 
-image_height: Desired height (pixels) of your output heatmapmimage.
-num_data_cols: Number of data columns in the input CSV data file (exclude the labels)
-num_data_rows: Number of data rows in the input CSV data file (exclude the labels)
-csv_data_filename: File path of your csv data file.
+  - image_width: Desired width (pixels) of your output heatmap image. 
+  - image_height: Desired height (pixels) of your output heatmapmimage.
+  - num_data_cols: Number of data columns in the input CSV data file (exclude the labels)
+  - num_data_rows: Number of data rows in the input CSV data file (exclude the labels)
+  - csv_data_filename: File path of your csv data file.
 - Example usage via commandline: 
 ```bash
 generators/heatmap_gen_fit_image 10000 10000 8 10000 sample_data/hugeGenesFile.csv RdYlGn_discrete > example_output/hugeGenesFile.png
