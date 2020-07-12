@@ -33,11 +33,4 @@
         android:scaleType="fitXY"
         android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/testText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-
 </LinearLayout>
