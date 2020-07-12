@@ -19,17 +19,17 @@ Step 3: Select your AR supported device or emulator.
 Step 4: Run the app by clicking the run (play) button in the toolbar.
 
 ### Examples:
-![alt text](Screenshots/interface.png "Screenshot of a the interface with no maps placed")
+<img src="Screenshots/interface.png" width = "200">
 <p align="center">
   <b>Users can set the image and height of maps.</b><br>
 </p>
 
-![alt text](Screenshots/multisize.png "Screenshot of multiple maps placed with different sizes")
+<img src="Screenshots/multisize.png" width = "200">
 <p align="center">
   <b>Multiple maps can be shown at once with different sizes.</b><br>
 </p>
 
-![alt text](Screenshots/imageset.png "Screenshot of a map with an image set from the phone's files")
+<img src="Screenshots/imageset.png" width = "200">
 <p align="center">
   <b>The map can be set to an image stored in the phone's files.</b><br>
 </p>
