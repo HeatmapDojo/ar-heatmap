@@ -13,9 +13,9 @@ To run the project, you will need an AR supported device or the Android Emulator
 ### Installation:
 
 #### Android Studio:
-Step 1: Open the project via File->Open and selecting the [ARCoreDemo](ARCoreDemo) project folder.
-Step 2: Build the app by clicking the build (hammer) button in the toolbar.
-Step 3: Select your AR supported device or emulator.
+Step 1: Open the project via File->Open and selecting the [ARCoreDemo](ARCoreDemo) project folder. <br>
+Step 2: Build the app by clicking the build (hammer) button in the toolbar. <br>
+Step 3: Select your AR supported device or emulator. <br>
 Step 4: Run the app by clicking the run (play) button in the toolbar.
 
 ### Examples:
