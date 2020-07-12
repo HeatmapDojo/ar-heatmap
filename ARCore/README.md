@@ -35,8 +35,8 @@ Step 4: Run the app by clicking the run (play) button in the toolbar.
 </p>
  
 ### Built With:
-[Hololens](https://www.microsoft.com/en-us/hololens/developers)  
-[ARKit](https://developer.apple.com/augmented-reality/)
+[ARCore](https://developers.google.com/ar)  
+[Sceneform](https://developers.google.com/sceneform/develop)  
 
 ### Authors:
 Wesley Chen - Initial work
