@@ -13,23 +13,23 @@ To run the project, you will need an AR supported device or the Android Emulator
 ### Installation:
 
 #### Android Studio:
-Step 1: Open the project via File->Open and selecting the [ARCoreDemo](ARCore/ARCoreDemo) project folder.
+Step 1: Open the project via File->Open and selecting the [ARCoreDemo](ARCoreDemo) project folder.
 Step 2: Build the app by clicking the build (hammer) button in the toolbar.
 Step 3: Select your AR supported device or emulator.
 Step 4: Run the app by clicking the run (play) button in the toolbar.
 
 ### Examples:
-![alt text](ARCore/Screenshots/slate.png "Screenshot of a the interface with no maps placed")
+![alt text](Screenshots/interface.png "Screenshot of a the interface with no maps placed")
 <p align="center">
   <b>Users can set the image and height of maps.</b><br>
 </p>
 
-![alt text](ARCore/Screenshots/slate.png "Screenshot of multiple maps placed with different sizes")
+![alt text](Screenshots/multisize.png "Screenshot of multiple maps placed with different sizes")
 <p align="center">
   <b>Multiple maps can be shown at once with different sizes.</b><br>
 </p>
 
-![alt text](ARCore/Screenshots/slate.png "Screenshot of a map with an image set from the phone's files")
+![alt text](Screenshots/imageset.png "Screenshot of a map with an image set from the phone's files")
 <p align="center">
   <b>The map can be set to an image stored in the phone's files.</b><br>
 </p>
