@@ -5,35 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.ARCoreDemo.MainActivity">
 
     <include layout="@layout/content_ar" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/setImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:clickable="false"
-        android:onClick="loadImage"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
-        android:translationY="-32dp"
-        android:text="Map Height:" />
-
-    <SeekBar
-        android:id="@+id/mapHeightBar"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="16dp"
-        android:layout_marginRight="16dp"
-        android:padding="4dp" />
 </android.support.design.widget.CoordinatorLayout>

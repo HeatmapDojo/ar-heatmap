@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.ar.sceneform.samples.hellosceneform;
+package com.example.ARCoreDemo;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -52,13 +52,13 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final double MIN_OPENGL_VERSION = 3.0;
-    private ViewRenderable mapRenderable;
+    private ViewRenderable mapRenderable, settingsRenderable;
     final int OPEN_REQUEST_CODE = 41;
     private float mapHeight = 1.0f;
     private ArFragment arFragment;
     private Anchor anchor;
-    private AnchorNode settingsAnchorNode;
-    private boolean imageSet = false;
+    private AnchorNode settingsAnchorNode, mapAnchorNode;
+    private boolean imageSet = false, settingsPlaced = false;
     private Uri heatmapUri;
 
     @Override
@@ -73,7 +73,64 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_main);
-        SeekBar mapHeightBar = (SeekBar) findViewById(R.id.mapHeightBar);
+
+        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+
+        // Build the heatmap renderable from the view
+        CompletableFuture<ViewRenderable> settingsMapStage =
+                ViewRenderable.builder().setView(this, R.layout.settings).build();
+
+        CompletableFuture.allOf(settingsMapStage)
+                .handle(
+                        (notUsed, throwable) -> {
+                            if (throwable != null) {
+                                DemoUtils.displayError(this, "Unable to load renderable", throwable);
+                                return null;
+                            }
+
+                            try {
+                                settingsRenderable = settingsMapStage.get();
+
+                                // Everything finished loading successfully.
+                            } catch (InterruptedException | ExecutionException ex) {
+                                DemoUtils.displayError(this, "Unable to load renderable", ex);
+                            }
+
+                            return null;
+                        });
+
+        // Listener for attempts to place maps
+        arFragment.setOnTapArPlaneListener(
+                (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
+                    // Build the heatmap view
+                    if(!settingsPlaced) {
+                        // Build the heatmap renderable from the view
+
+                        // Create the Anchor.
+                        anchor = hitResult.createAnchor();
+                        settingsAnchorNode = new AnchorNode(anchor);
+                        settingsAnchorNode.setParent(arFragment.getArSceneView().getScene());
+
+                        // Create the map and add it to the scene
+                        Node settings = createSettings();
+                        settingsAnchorNode.addChild(settings);
+                        settingsPlaced = true;
+                    }
+                });
+    }
+
+    private Node createSettings() {
+        Node base = new Node();
+
+        Node settings = new Node();
+        settings.setParent(base);
+        settings.setRenderable(settingsRenderable);
+        settings.setLocalPosition(new Vector3(0.0f, 0f, 0.0f));
+        settings.setWorldRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), -90f));
+
+        View settingsView = View.inflate(this, R.layout.settings, null);
+
+        SeekBar mapHeightBar = (SeekBar) settingsView.findViewById(R.id.heightBar);
         mapHeightBar.setProgress((int) (mapHeight * 10));
 
         mapHeightBar.setOnSeekBarChangeListener(
@@ -91,52 +148,51 @@ public class MainActivity extends AppCompatActivity {
                     public void onStopTrackingTouch(SeekBar seekBar) {
                     }
                 });
+        return base;
+    }
 
+    public void placeMap(View view) {
+        // Remove the settings
+        settingsAnchorNode.setParent(null);
+        settingsPlaced = false;
 
-        arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
+        // Create the heatmap view
+        View heatmapView = View.inflate(this, R.layout.heatmap, null);
+        if (imageSet) {
+            ImageView iv1 = (ImageView) heatmapView.findViewById(R.id.heatmapImage);
+            iv1.setImageURI(heatmapUri);
+        }
 
-        arFragment.setOnTapArPlaneListener(
-                (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
-                    // Build the heatmap view
-                    View heatmapView = View.inflate(this, R.layout.heatmap, null);
-                    if (imageSet) {
-                        ImageView iv1 = (ImageView) heatmapView.findViewById(R.id.heatmapImage);
-                        iv1.setImageURI(heatmapUri);
-                        TextView tv1 = (TextView) heatmapView.findViewById(R.id.testText);
-                        tv1.setText("image set");
-                    }
+        // Build the heatmap renderable from the view
+        CompletableFuture<ViewRenderable> heatmapMapStage =
+                ViewRenderable.builder().setView(this, heatmapView).build();
 
-                    // Build the heatmap renderable from the view
-                    CompletableFuture<ViewRenderable> heatmapMapStage =
-                            ViewRenderable.builder().setView(this, heatmapView).build();
+        CompletableFuture.allOf(heatmapMapStage)
+                .handle(
+                        (notUsed, throwable) -> {
+                            if (throwable != null) {
+                                DemoUtils.displayError(this, "Unable to load renderable", throwable);
+                                return null;
+                            }
 
-                    CompletableFuture.allOf(heatmapMapStage)
-                            .handle(
-                                    (notUsed, throwable) -> {
-                                        if (throwable != null) {
-                                            DemoUtils.displayError(this, "Unable to load renderable", throwable);
-                                            return null;
-                                        }
+                            try {
+                                mapRenderable = heatmapMapStage.get();
 
-                                        try {
-                                            mapRenderable = heatmapMapStage.get();
+                                // Everything finished loading successfully.
+                            } catch (InterruptedException | ExecutionException ex) {
+                                DemoUtils.displayError(this, "Unable to load renderable", ex);
+                            }
 
-                                            // Everything finished loading successfully.
-                                        } catch (InterruptedException | ExecutionException ex) {
-                                            DemoUtils.displayError(this, "Unable to load renderable", ex);
-                                        }
+                            return null;
+                        });
 
-                                        return null;
-                                    });
-                    // Create the Anchor.
-                    anchor = hitResult.createAnchor();
-                    settingsAnchorNode = new AnchorNode(anchor);
-                    settingsAnchorNode.setParent(arFragment.getArSceneView().getScene());
+        // Create the Anchor.
+        mapAnchorNode = new AnchorNode(anchor);
+        mapAnchorNode.setParent(arFragment.getArSceneView().getScene());
 
-                    // Create the map and add it to the scene
-                    Node map = createMap();
-                    settingsAnchorNode.addChild(map);
-                });
+        // Create the map and add it to the scene
+        Node map = createMap();
+        mapAnchorNode.addChild(map);
     }
 
     private Node createMap() {

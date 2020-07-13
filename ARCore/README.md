@@ -42,6 +42,6 @@ Step 4: Run the app by clicking the run (play) button in the toolbar.
 Wesley Chen - Initial work
 
 ### License:
-This project is licensed under the MPL License - see the [LICENSE.md](~/LICENSE) file for details
+This project is licensed under the MPL License - see the [LICENSE.md](/../LICENSE) file for details
 
 
