@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     if (imageSet) {
                         ImageView iv1 = (ImageView) heatmapView.findViewById(R.id.heatmapImage);
                         iv1.setImageURI(heatmapUri);
-                        TextView tv1 = (TextView) heatmapView.findViewById(R.id.testText);
-                        tv1.setText("image set");
+                        //TextView tv1 = (TextView) heatmapView.findViewById(R.id.testText);
+                        //tv1.setText("image set");
                     }
 
                     // Build the heatmap renderable from the view
