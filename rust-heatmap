@@ -1,1 +1,138 @@
 
+use std::fs::File;
+use std::io::BufReader;
+use std::path::Path;
+use std::io::prelude::*;
+use std::io;
+use ::std::io::*;
+use image::{ImageBuffer, Rgb};
+use std::env;
+fn get_input() -> String {
+    let mut buffer = String::new();
+    stdin().read_line(&mut buffer).expect("Failed");
+    buffer
+}
+//the only colorscheme right now
+fn scale1(scale: &mut [Vec<i32>], shades: i32){
+    scale[0]=vec![0,0,0];
+    scale[1]=vec![120,6,6];
+    scale[2]=vec![153,3,3];
+    scale[3]=vec![209,4,4];
+    scale[4]=vec![255,0,0];
+    scale[5]=vec![252, 113, 13];
+    scale[6]=vec![252, 192, 13];
+    for i in (7)..shades/2{
+        scale[i as usize]=vec![236, 252, 13];
+    }
+    for i in (shades/2)..shades{
+        scale[i as usize]=vec![255,255,0];
+    }
+}
+//path rows columns
+fn main() -> std::io::Result<()> {
+    let args: Vec<String> = env::args().collect();
+    let mut str=args[1].to_string();
+    let shades=100;
+//    use std::io::{stdin,stdout,Write};
+//    let mut str=String::new();
+//    println!("File:");
+//    let mut str=get_input();
+//    stdin().read_line(&mut str).expect("Did not enter a correct string");
+    //str.pop();
+    let path=Path::new(&str);
+//    let p=Path::new("info.txt");
+//    assert_eq!(path,p);
+//    println!("rows:");
+    let rows=args[2].to_string().parse::<usize>().unwrap();
+//    let rows=5;
+//    println!("columns:");
+    let columns=args[3].to_string().parse::<usize>().unwrap();
+    //let columns=5;
+    //println!("image width (pixels):")
+//    let width=get_input().trim().parse::<i64>().unwrap();
+    //let mut width=500;
+//    println!("image height (pixels):")
+//    let height=get_input().trim().parse::<i64>().unwrap();
+//    let mut height=500;
+    let mut width=args[4];
+    let mut height=args[5];
+    let cw=width/columns;
+    let ch=height/rows;
+    let width=cw*columns;
+    let height=ch*rows;
+    println!("{} {}",width,height);
+    let mut scale = vec![vec![0;3]; shades];
+    scale1(&mut scale,shades as i32);
+    let color1: Vec<i64>=vec![200,37,0];
+    let color2: Vec<i64>=vec![0,130,160];
+    let mut grid = vec![vec![0;columns]; rows];
+//    println!("{}",grid[1][2]);
+    // println!("{}",cl);
+    // println!("{}",cw);
+    //let p=Path::new("info.txt");
+    //let file = File::open("info.txt")?;
+    //println!("{}",str);
+    //assert_eq!(p,path);
+    let file=File::open(path)?;
+    let mut buf_reader = BufReader::new(file);
+    let mut contents = String::new();
+    buf_reader.read_to_string(&mut contents)?;
+    let mut split = contents.split("\n");
+    // for s in split {
+    //     println!("{}", s)
+    // }
+    let vec: Vec<&str> = split.collect();
+    let mut counter=0;
+    for i in vec{
+        let mut sp=i.split(",");
+        let zero:i32=sp.next().unwrap().to_string().parse().unwrap();
+        let mut one:i32=sp.next().unwrap().to_string().parse().unwrap();
+        let mut two:i32=sp.next().unwrap().to_string().parse().unwrap();
+        //one/=1000;
+        //two/=1000;
+        //println!("{} {}",one,two);
+        grid[(one) as usize][(two) as usize]+=1;
+        counter+=1;
+
+        //println!("{}",one);
+        // let x: i32 = sp.next().parse().unwrap();
+        // let y: i32 = sp.next().parse().unwrap();
+        // println!("{} {}",one,two);
+    }
+    let mut image = image::ImageBuffer::new(width as u32, height as u32);
+    for x in 0..(width-1){
+        for y in 0..(height-1){
+        //    let mut s=100*shades*grid[y/ch as usize][x/cw as usize]/counter;
+            //change this for different proportions for the gradients
+            let mut s=20*shades*grid[y/ch as usize][x/cw as usize]/counter;
+            if s>=shades{
+                s=shades-1;
+            }
+            image.put_pixel(x as u32, y as u32, Rgb([scale[s][0] as u8,
+                scale[s][1] as u8,scale[s][2] as u8]));
+            //let r=(color2[0]-color1[0])*grid[y/ch as usize][x/cw as usize]/counter+color1[0];
+            //let g=(color2[1]-color1[1])*grid[y/ch as usize][x/cw as usize]/counter+color1[1];
+            //let b=(color2[2]-color1[2])*grid[y/ch as usize][x/cw as usize]/counter+color1[2];
+        //    println!("{} {} {}",r,g,b);
+            // if (s>0){
+            //     println!("{} {} {} {} {}",scale[s][0],scale[s][1],s,x,y);
+            // }
+            //image.put_pixel(x as u32, y as u32, Rgb([r as u8,g as u8,b as u8]));
+        }
+        // if (x==1000){
+        //     println!("hi1");
+        // }
+        // if (x==5000){
+        //     println!("hi1");
+        // }
+        // if (x==10000){
+        //     println!("hi2");
+        // }
+    }
+    println!("hi");
+    // for x in vec.iter(){
+    //     println!("{}",x);
+    // }
+    image.save("thing.png").unwrap();
+    Ok(())
+}
