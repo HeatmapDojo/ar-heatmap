@@ -1,4 +1,3 @@
-
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
@@ -54,13 +53,13 @@ fn main() -> std::io::Result<()> {
 //    println!("image height (pixels):")
 //    let height=get_input().trim().parse::<i64>().unwrap();
 //    let mut height=500;
-    let mut width=args[4];
-    let mut height=args[5];
-    let cw=width/columns;
-    let ch=height/rows;
+    let mut width=args[4].to_string().parse::<usize>().unwrap();
+    let mut height=args[5].to_string().parse::<usize>().unwrap();
+    let cw=(width as usize)/columns;
+    let ch=(height as usize)/rows;
     let width=cw*columns;
     let height=ch*rows;
-    println!("{} {}",width,height);
+//    println!("{} {}",width,height);
     let mut scale = vec![vec![0;3]; shades];
     scale1(&mut scale,shades as i32);
     let color1: Vec<i64>=vec![200,37,0];
@@ -85,7 +84,7 @@ fn main() -> std::io::Result<()> {
     let mut counter=0;
     for i in vec{
         let mut sp=i.split(",");
-        let zero:i32=sp.next().unwrap().to_string().parse().unwrap();
+//        let zero:i32=sp.next().unwrap().to_string().parse().unwrap();
         let mut one:i32=sp.next().unwrap().to_string().parse().unwrap();
         let mut two:i32=sp.next().unwrap().to_string().parse().unwrap();
         //one/=1000;
@@ -104,7 +103,7 @@ fn main() -> std::io::Result<()> {
         for y in 0..(height-1){
         //    let mut s=100*shades*grid[y/ch as usize][x/cw as usize]/counter;
             //change this for different proportions for the gradients
-            let mut s=20*shades*grid[y/ch as usize][x/cw as usize]/counter;
+            let mut s=shades*grid[y/ch as usize][x/cw as usize]/counter;
             if s>=shades{
                 s=shades-1;
             }
@@ -129,7 +128,6 @@ fn main() -> std::io::Result<()> {
         //     println!("hi2");
         // }
     }
-    println!("hi");
     // for x in vec.iter(){
     //     println!("{}",x);
     // }
