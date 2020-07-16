@@ -54,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
     private static final double MIN_OPENGL_VERSION = 3.0;
     private ViewRenderable mapRenderable, settingsRenderable;
     final int OPEN_REQUEST_CODE = 41;
-    private float mapHeight = 1.0f;
     private ArFragment arFragment;
     private Anchor anchor;
     private AnchorNode settingsAnchorNode, mapAnchorNode;
     private boolean imageSet = false, settingsPlaced = false;
     private Uri heatmapUri;
+    private final MapSettings mapSettings = new MapSettings();
 
     @Override
     @SuppressWarnings({"AndroidApiChecker", "FutureReturnValueIgnored"})
@@ -76,9 +76,34 @@ public class MainActivity extends AppCompatActivity {
 
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.ux_fragment);
 
-        // Build the heatmap renderable from the view
+        // Build the settings renderable from the settings.xml layout file
+        View settingsView = View.inflate(this, R.layout.settings, null);
+
+        SeekBar mapHeightBar = (SeekBar) settingsView.findViewById(R.id.heightBar);
+        mapHeightBar.setProgress((int) (mapSettings.getHeight() * 20));
+
+        TextView heightText = (TextView) settingsView.findViewById(R.id.heightValue);
+
+        mapHeightBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        mapSettings.setHeight((float) progress / 20.0f);
+                        heightText.setText(mapSettings.getHeight() + "meters");
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                });
+
+        // Build the settings renderable from the view
         CompletableFuture<ViewRenderable> settingsMapStage =
-                ViewRenderable.builder().setView(this, R.layout.settings).build();
+                ViewRenderable.builder().setView(this, settingsView).build();
 
         CompletableFuture.allOf(settingsMapStage)
                 .handle(
@@ -128,34 +153,10 @@ public class MainActivity extends AppCompatActivity {
         settings.setLocalPosition(new Vector3(0.0f, 0f, 0.0f));
         settings.setWorldRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), -90f));
 
-        View settingsView = View.inflate(this, R.layout.settings, null);
-
-        SeekBar mapHeightBar = (SeekBar) settingsView.findViewById(R.id.heightBar);
-        mapHeightBar.setProgress((int) (mapHeight * 10));
-
-        mapHeightBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        mapHeight = (float) progress / 10.0f;
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
-                });
         return base;
     }
 
     public void placeMap(View view) {
-        // Remove the settings
-        settingsAnchorNode.setParent(null);
-        settingsPlaced = false;
-
         // Create the heatmap view
         View heatmapView = View.inflate(this, R.layout.heatmap, null);
         if (imageSet) {
@@ -193,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
         // Create the map and add it to the scene
         Node map = createMap();
         mapAnchorNode.addChild(map);
+        // Remove the settings
+        settingsAnchorNode.setParent(null);
+        settingsPlaced = false;
     }
 
     private Node createMap() {
@@ -203,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         map.setRenderable(mapRenderable);
         map.setLocalPosition(new Vector3(0.0f, 0f, 0.0f));
         map.setWorldRotation(Quaternion.axisAngle(new Vector3(1f, 0, 0), -90f));
-        map.setLocalScale(new Vector3(mapHeight, mapHeight, mapHeight));
+        map.setLocalScale(new Vector3(mapSettings.getHeight(), mapSettings.getHeight(), mapSettings.getHeight()));
         return base;
     }
 
