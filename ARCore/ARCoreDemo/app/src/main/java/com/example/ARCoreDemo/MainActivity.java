@@ -130,6 +130,27 @@ public class MainActivity extends AppCompatActivity {
                     // Build the heatmap view
                     if(!settingsPlaced) {
                         // Build the heatmap renderable from the view
+                        CompletableFuture<ViewRenderable> heatmapMapStage =
+                                ViewRenderable.builder().setView(this, R.layout.heatmap).build();
+
+                        CompletableFuture.allOf(heatmapMapStage)
+                                .handle(
+                                        (notUsed, throwable) -> {
+                                            if (throwable != null) {
+                                                DemoUtils.displayError(this, "Unable to load renderable", throwable);
+                                                return null;
+                                            }
+
+                                            try {
+                                                mapRenderable = heatmapMapStage.get();
+
+                                                // Everything finished loading successfully.
+                                            } catch (InterruptedException | ExecutionException ex) {
+                                                DemoUtils.displayError(this, "Unable to load renderable", ex);
+                                            }
+
+                                            return null;
+                                        });
 
                         // Create the Anchor.
                         anchor = hitResult.createAnchor();
@@ -157,36 +178,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void placeMap(View view) {
-        // Create the heatmap view
-        View heatmapView = View.inflate(this, R.layout.heatmap, null);
-        if (imageSet) {
-            ImageView iv1 = (ImageView) heatmapView.findViewById(R.id.heatmapImage);
-            iv1.setImageURI(heatmapUri);
-        }
-
-        // Build the heatmap renderable from the view
-        CompletableFuture<ViewRenderable> heatmapMapStage =
-                ViewRenderable.builder().setView(this, heatmapView).build();
-
-        CompletableFuture.allOf(heatmapMapStage)
-                .handle(
-                        (notUsed, throwable) -> {
-                            if (throwable != null) {
-                                DemoUtils.displayError(this, "Unable to load renderable", throwable);
-                                return null;
-                            }
-
-                            try {
-                                mapRenderable = heatmapMapStage.get();
-
-                                // Everything finished loading successfully.
-                            } catch (InterruptedException | ExecutionException ex) {
-                                DemoUtils.displayError(this, "Unable to load renderable", ex);
-                            }
-
-                            return null;
-                        });
-
         // Create the Anchor.
         mapAnchorNode = new AnchorNode(anchor);
         mapAnchorNode.setParent(arFragment.getArSceneView().getScene());
@@ -225,6 +216,11 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == OPEN_REQUEST_CODE) {
                 if (resultData != null) {
                     heatmapUri = resultData.getData();
+                    View heatmapView = mapRenderable.getView();
+                    if (imageSet) {
+                        ImageView iv1 = (ImageView) heatmapView.findViewById(R.id.heatmapImage);
+                        iv1.setImageURI(heatmapUri);
+                    }
                     imageSet = true;
                 }
             }
