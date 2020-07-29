@@ -30,36 +30,36 @@
 #include <map>
 
 #include "lodepng.h"
-#include "heatmap.h"
+#include "../heatmap.h"
 
-#include "colorschemes/gray.h"
-#include "colorschemes/Blues.h"
-#include "colorschemes/BrBG.h"
-#include "colorschemes/BuGn.h"
-#include "colorschemes/BuPu.h"
-#include "colorschemes/GnBu.h"
-#include "colorschemes/Greens.h"
-#include "colorschemes/Greys.h"
-#include "colorschemes/Oranges.h"
-#include "colorschemes/OrRd.h"
-#include "colorschemes/PiYG.h"
-#include "colorschemes/PRGn.h"
-#include "colorschemes/PuBuGn.h"
-#include "colorschemes/PuBu.h"
-#include "colorschemes/PuOr.h"
-#include "colorschemes/PuRd.h"
-#include "colorschemes/Purples.h"
-#include "colorschemes/RdBu.h"
-#include "colorschemes/RdGy.h"
-#include "colorschemes/RdPu.h"
-#include "colorschemes/RdYlBu.h"
-#include "colorschemes/RdYlGn.h"
-#include "colorschemes/Reds.h"
-#include "colorschemes/Spectral.h"
-#include "colorschemes/YlGnBu.h"
-#include "colorschemes/YlGn.h"
-#include "colorschemes/YlOrBr.h"
-#include "colorschemes/YlOrRd.h"
+#include "../colorschemes/gray.h"
+#include "../colorschemes/Blues.h"
+#include "../colorschemes/BrBG.h"
+#include "../colorschemes/BuGn.h"
+#include "../colorschemes/BuPu.h"
+#include "../colorschemes/GnBu.h"
+#include "../colorschemes/Greens.h"
+#include "../colorschemes/Greys.h"
+#include "../colorschemes/Oranges.h"
+#include "../colorschemes/OrRd.h"
+#include "../colorschemes/PiYG.h"
+#include "../colorschemes/PRGn.h"
+#include "../colorschemes/PuBuGn.h"
+#include "../colorschemes/PuBu.h"
+#include "../colorschemes/PuOr.h"
+#include "../colorschemes/PuRd.h"
+#include "../colorschemes/Purples.h"
+#include "../colorschemes/RdBu.h"
+#include "../colorschemes/RdGy.h"
+#include "../colorschemes/RdPu.h"
+#include "../colorschemes/RdYlBu.h"
+#include "../colorschemes/RdYlGn.h"
+#include "../colorschemes/Reds.h"
+#include "../colorschemes/Spectral.h"
+#include "../colorschemes/YlGnBu.h"
+#include "../colorschemes/YlGn.h"
+#include "../colorschemes/YlOrBr.h"
+#include "../colorschemes/YlOrRd.h"
 
 // Too bad C++ doesn't have nice mad reflection skillz!
 std::map<std::string, const heatmap_colorscheme_t*> g_schemes = {
@@ -198,7 +198,7 @@ int main(int argc, char* argv[])
         std::cout << "  " << argv[0] << " image_width image_height tile_ratio_x tile_ratio_y num_data_cols num_data_rows csv_data_filename [colorscheme]" << std::endl;
 #endif 
         std::cout << std::endl;
-        std::cout << "  To get a list of available colorschemes, run" << std::endl;
+        std::cout << "  To get a list of available ../colorschemes, run" << std::endl;
         std::cout << "  " << argv[0] << " -l" << std::endl;
         std::cout << "  The default colorscheme is Spectral_mixed." << std::endl << std::endl;
 
