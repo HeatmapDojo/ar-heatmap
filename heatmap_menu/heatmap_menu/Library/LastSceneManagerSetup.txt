@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/heatmap_menu.unity
-  isLoaded: 1
-  isActive: 1
