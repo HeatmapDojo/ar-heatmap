@@ -3,7 +3,6 @@ package com.example.heatmapmenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,13 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    String filePath, colorscheme, heatmapName;
+    String generator, filePath, colorscheme, heatmapName;
     int width, height, tileRatX, tileRatY, columns, rows;
     EditText widthInput, heightInput, tileRatXInput, tileRatYInput, columnsInput, rowsInput,
             colorschemeInput, heatmapInput;
@@ -30,6 +30,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize the heatmap binary if it isn't initialized already
+        File genCheck = new File(getFilesDir().getPath(), "heatmap_gen");
+        if(!genCheck.exists()) {
+            try {
+                InputStream istream = getResources().openRawResource(R.raw.heatmap_gen);
+                byte[] buffer = new byte[istream.available()];
+                istream.read(buffer);
+                istream.close();
+
+                FileOutputStream fostream = openFileOutput("heatmap_gen", MODE_PRIVATE);
+                fostream.write(buffer);
+                fostream.close();
+
+                File genFile = getFileStreamPath("heatmap_gen");
+                genFile.setExecutable(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         //Initializing EditTexts
         widthInput = (EditText) findViewById(R.id.widthInput);
@@ -47,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Initializing TextView
         showFilepath = (TextView) findViewById(R.id.showFile);
+
+        //Initializing heatmap generator
+        generator = getFilesDir().getPath() + "/heatmap_gen";
 
         //Get Filepath
         filepathButton.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //Generate the heatmap from the heatmap_gen
                 try {
-                    Runtime.getRuntime().exec(filePath + " " + width + " " + height + " " +
-                            tileRatX + " " + tileRatY + " " + columns + " " + rows + " " + filePath +
-                            " > " + heatmapName + ".png");
+                    Runtime.getRuntime().exec(generator + " " + width + " " + height +
+                            " " + tileRatX + " " + tileRatY + " " + columns + " " + rows + " " +
+                            filePath + " > " + heatmapName + ".png");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
