@@ -6,15 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     Button generateButton, filepathButton;
     TextView showFilepath;
     Intent getFile;
+
+    private static final String TAG = "heatmapmenu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                 File genFile = getFileStreamPath("heatmap_gen");
                 genFile.setExecutable(true);
+                Log.i(TAG, "Initialized heatmap_gen.\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,16 +105,24 @@ public class MainActivity extends AppCompatActivity {
 
                 //Generate the heatmap from the heatmap_gen
                 try {
-                    Runtime.getRuntime().exec(generator + " " + width + " " + height +
-                            " " + tileRatX + " " + tileRatY + " " + columns + " " + rows + " " +
-                            filePath + " > " + heatmapName + ".png");
+                    Process p = Runtime.getRuntime().exec(generator + " " + width + " " +
+                            height + " " + tileRatX + " " + tileRatY + " " + columns + " " + rows +
+                            " " + filePath);
+                    //Read the data output from the generator
+                    InputStreamReader i = new InputStreamReader(p.getInputStream());
+                    FileOutputStream fos = openFileOutput(heatmapName, MODE_PRIVATE);
+                    byte line = 0;
+                    while ((line = (byte) i.read()) != -1){
+                        fos.write(line);
+                        fos.flush();
+                    }
+                    fos.close();
+                    Log.i(TAG, "output at " + getFilesDir().getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
     }
 
     @Override

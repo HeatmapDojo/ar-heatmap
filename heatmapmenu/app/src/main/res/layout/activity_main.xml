@@ -107,7 +107,7 @@
             android:autofillHints="false"
             android:ems="10"
             android:hint="@string/colorscheme"
-            android:inputType="numberSigned"
+            android:inputType="textShortMessage"
             tools:layout_editor_absoluteX="100dp"
             tools:layout_editor_absoluteY="197dp" />
 
@@ -118,7 +118,7 @@
             android:autofillHints="false"
             android:ems="10"
             android:hint="@string/heatmap_name"
-            android:inputType="numberSigned"
+            android:inputType="textShortMessage"
             tools:layout_editor_absoluteX="100dp"
             tools:layout_editor_absoluteY="197dp" />
 
