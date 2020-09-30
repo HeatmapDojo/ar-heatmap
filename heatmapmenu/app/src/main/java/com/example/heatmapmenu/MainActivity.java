@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             " " + filePath);
                     //Read the data output from the generator
                     InputStreamReader i = new InputStreamReader(p.getInputStream());
-                    FileOutputStream fos = openFileOutput(heatmapName, MODE_PRIVATE);
+                    FileOutputStream fos = openFileOutput(heatmapName + ".png", MODE_PRIVATE);
                     byte line = 0;
                     while ((line = (byte) i.read()) != -1){
                         fos.write(line);
