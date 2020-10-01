@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">HeatmapMenu</string>
+    <string name="title">Heatmap Generator</string>
+    <string name="width">Image Width</string>
+    <string name="height">Image Height</string>
+    <string name="tileRatX">Tile Ratio X</string>
+    <string name="tileRatY">Tile Ratio Y</string>
+    <string name="columns">Columns in Datafile</string>
+    <string name="rows">Rows in Datafile</string>
+    <string name="filename">Data File</string>
+    <string name="colorscheme">Colorscheme</string>
+    <string name="heatmap_name">Heatmap Name</string>
+    <string name="generate">Generate</string>
+</resources>

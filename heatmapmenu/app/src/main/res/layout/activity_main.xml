@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="154dp" />
+
+        <EditText
+            android:id="@+id/widthInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/width"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/heightInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/height"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/tileRatioXInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/tileRatX"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/tileRatioYInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/tileRatY"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/columnsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/columns"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/rowsInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/rows"
+            android:inputType="numberSigned"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <TextView
+            android:id="@+id/showFile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/fileInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/filename" />
+
+        <EditText
+            android:id="@+id/colorschemeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/colorscheme"
+            android:inputType="textShortMessage"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <EditText
+            android:id="@+id/heatmapNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="false"
+            android:ems="10"
+            android:hint="@string/heatmap_name"
+            android:inputType="textShortMessage"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="197dp" />
+
+        <Button
+            android:id="@+id/generateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generate" />
+
+    </LinearLayout>
+</RelativeLayout>
